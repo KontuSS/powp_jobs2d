@@ -6,14 +6,14 @@ import edu.kis.legacy.drawer.shape.LineFactory;
 import edu.kis.powp.jobs2d.Job2dDriver;
 
 /**
- * driver adapter to drawer with several bugs.
+ * Driver adapter using SpecialLine from Drawer library.
+ * Allows drawing with special line style.
  */
-public class DriverToDrawerAdapter extends DrawPanelController implements Job2dDriver {
+public class LineDrawerAdapter implements Job2dDriver {
 	private int startX = 0, startY = 0;
 	private DrawPanelController panel;
 
-	public DriverToDrawerAdapter(DrawPanelController panel) {		
-		super();
+	public LineDrawerAdapter(DrawPanelController panel) {
 		this.panel = panel;
 	}
 
@@ -25,19 +25,18 @@ public class DriverToDrawerAdapter extends DrawPanelController implements Job2dD
 
 	@Override
 	public void operateTo(int x, int y) {
-		ILine line = LineFactory.getBasicLine();
+		ILine line = LineFactory.getSpecialLine();
 		line.setStartCoordinates(this.startX, this.startY);
 		line.setEndCoordinates(x, y);
 
 		panel.drawLine(line);
 
-		// Update start coordinates after moving
 		this.startX = x;
 		this.startY = y;
 	}
 
 	@Override
 	public String toString() {
-		return "@Q!$!@$!#@$(*#@&Q(%^*#@";
+		return "Special Line Drawer";
 	}
 }
